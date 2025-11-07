@@ -1,0 +1,47 @@
+{
+  "model": "Linear Regression",
+  "items": [
+    {
+      "period": "октябрь 2025",
+      "volumeBillionTenge": 134.1038563087081,
+      "isPrediction": true,
+      "year": 2025,
+      "month": 10
+    },
+    {
+      "period": "ноябрь 2025",
+      "volumeBillionTenge": 133.24872358543124,
+      "isPrediction": true,
+      "year": 2025,
+      "month": 11
+    },
+    {
+      "period": "декабрь 2025",
+      "volumeBillionTenge": 132.6101673820339,
+      "isPrediction": true,
+      "year": 2025,
+      "month": 12
+    },
+    {
+      "period": "январь 2026",
+      "volumeBillionTenge": 116.86168700721579,
+      "isPrediction": true,
+      "year": 2026,
+      "month": 1
+    },
+    {
+      "period": "февраль 2026",
+      "volumeBillionTenge": 117.80899541339593,
+      "isPrediction": true,
+      "year": 2026,
+      "month": 2
+    },
+    {
+      "period": "март 2026",
+      "volumeBillionTenge": 116.94576047689435,
+      "isPrediction": true,
+      "year": 2026,
+      "month": 3
+    }
+  ]
+}
