@@ -307,7 +307,6 @@ class DataProcessor:
 
 
 if __name__ == "__main__":
-    # Тестирование модуля
     json_data = [
         {"id": "4", "transaction": "2682.9119999999948", "name_ru": "март 2025 года", 
          "quantity": "109585.26789273391", "name_kz": "2025 жылғы наурыз"},

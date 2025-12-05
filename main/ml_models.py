@@ -355,6 +355,51 @@ class BankTransferMLAnalyzer:
             print(f"{month_name} {date.year}: {pred:.2f} млрд тенге")
         
         return future_dates, future_predictions
+
+    def forecast_future_for_model(self, model, periods=3):
+        """Прогноз на будущие периоды для конкретной модели"""
+        last_row = self.df.iloc[-1:].copy()
+        current_month = int(last_row['month_num'].values[0])
+        current_year = int(last_row['year'].values[0])
+        current_index = int(last_row['month_index'].values[0])
+
+        future_predictions = []
+        future_dates = []
+
+        for _ in range(periods):
+            if current_month == 12:
+                next_month = 1
+                next_year = current_year + 1
+            else:
+                next_month = current_month + 1
+                next_year = current_year
+            next_month_index = current_index + 1
+
+            next_data = last_row.copy()
+            next_data['month_num'] = next_month
+            next_data['year'] = next_year
+            next_data['month_index'] = next_month_index
+            next_data['quarter'] = (next_month - 1) // 3 + 1
+            next_data['is_year_end'] = int(next_month == 12)
+            next_data['is_year_start'] = int(next_month == 1)
+            next_data['is_quarter_end'] = int(next_month in [3, 6, 9, 12])
+            next_data['month_sin'] = np.sin(2 * np.pi * next_month / 12)
+            next_data['month_cos'] = np.cos(2 * np.pi * next_month / 12)
+
+            next_features = next_data[self.feature_cols].values
+            next_features_scaled = self.scaler.transform(next_features)
+            prediction = model.predict(next_features_scaled)[0]
+
+            future_predictions.append(prediction)
+            future_dates.append(pd.Timestamp(year=int(next_year), month=int(next_month), day=1))
+
+            last_row = next_data.copy()
+            last_row['amount_billion_tenge'] = prediction
+            current_month = next_month
+            current_year = next_year
+            current_index = next_month_index
+
+        return future_dates, future_predictions
     
     def visualize_results(self, future_dates=None, future_predictions=None):
         """Комплексная визуализация результатов"""
@@ -489,13 +534,9 @@ def run_ml_analysis(csv_file='bank_transfers_clean.csv'):
     # Обучение моделей
     results_df = analyzer.train_models()
     
-    # Анализ важности признаков
-    analyzer.analyze_feature_importance()
-    
     # Прогноз на будущее (окт 2025 - мар 2026 = 6 месяцев)
     future_dates, future_predictions = analyzer.forecast_future(periods=6)
 
-    # Экспорт прогноза для фронтенда
     try:
         export_items = []
         month_names_ru = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
@@ -520,6 +561,39 @@ def run_ml_analysis(csv_file='bank_transfers_clean.csv'):
         print(f"\n✓ Прогноз экспортирован для фронтенда в '{export_path}'")
     except Exception as e:
         print(f"\n⚠️ Не удалось экспортировать прогноз для фронтенда: {e}")
+
+    # Экспорт прогнозов для всех моделей
+    try:
+        month_names_ru = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
+                          'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']
+        models_payload = []
+        for name, model in analyzer.models.items():
+            m_dates, m_preds = analyzer.forecast_future_for_model(model, periods=6)
+            items = []
+            for dt, val in zip(m_dates, m_preds):
+                items.append({
+                    'period': f"{month_names_ru[int(dt.month) - 1].lower()} {int(dt.year)}",
+                    'volumeBillionTenge': float(val),
+                    'isPrediction': True,
+                    'year': int(dt.year),
+                    'month': int(dt.month)
+                })
+            models_payload.append({
+                'model': name,
+                'items': items
+            })
+
+        public_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'front', 'public'))
+        os.makedirs(public_dir, exist_ok=True)
+        export_all_path = os.path.join(public_dir, 'forecast_all.json')
+        with open(export_all_path, 'w', encoding='utf-8') as f:
+            json.dump({
+                'bestModel': analyzer.best_model_name,
+                'models': models_payload
+            }, f, ensure_ascii=False, indent=2)
+        print(f"\n✓ Прогнозы всех моделей экспортированы в '{export_all_path}'")
+    except Exception as e:
+        print(f"\n⚠️ Не удалось экспортировать прогнозы всех моделей: {e}")
     
     # Визуализация
     analyzer.visualize_results(future_dates, future_predictions)

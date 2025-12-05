@@ -110,10 +110,8 @@ def main():
     print("\nСозданные файлы:")
     print("  1. bank_transfers_clean.csv - очищенные данные")
     print("  2. bank_transfers_analysis.png - базовая визуализация")
-    print("  3. bank_transfers_advanced.png - продвинутая визуализация")
-    print("  4. ml_comprehensive_analysis.png - ML анализ")
-    print("  5. feature_importance.png - важность признаков")
-    print("  6. ml_model_comparison.csv - сравнение моделей")
+    print("  3. ml_comprehensive_analysis.png - ML анализ")
+    print("  4. ml_model_comparison.csv - сравнение моделей")
     
     plt.show()
 

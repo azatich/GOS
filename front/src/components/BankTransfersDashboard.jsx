@@ -22,6 +22,8 @@ export const BankTransfersDashboard = () => {
   const [forecast, setForecast] = useState({ model: null, items: [] });
   const [loadingForecast, setLoadingForecast] = useState(false);
   const [forecastError, setForecastError] = useState(null);
+  const [allForecasts, setAllForecasts] = useState({ bestModel: null, models: [] });
+  const [selectedModel, setSelectedModel] = useState(null);
 
   // Обработка данных
   const processedData = useMemo(() => {
@@ -51,12 +53,12 @@ export const BankTransfersDashboard = () => {
       try {
         let res = await fetch('/forecast.json', { cache: 'no-store' });
         if (!res.ok) {
-
+          
           res = await fetch('forecast.json', { cache: 'no-store' });
         }
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
-
+        
         const items = Array.isArray(data.items) ? data.items.map(item => ({
           period: item.period,
           volumeBillionTenge: item.volumeBillionTenge,
@@ -64,7 +66,7 @@ export const BankTransfersDashboard = () => {
         })) : [];
         setForecast({ model: data.model || null, items });
       } catch (e) {
-
+        
         try {
           const lastThree = processedData.slice(-3);
           const avgGrowth = (lastThree[2].volumeBillionTenge - lastThree[0].volumeBillionTenge) / 2;
@@ -87,8 +89,39 @@ export const BankTransfersDashboard = () => {
     loadForecast();
   }, []);
 
+  // Загрузка прогнозов всех моделей
+  useEffect(() => {
+    const loadAll = async () => {
+      try {
+        let res = await fetch('/forecast_all.json', { cache: 'no-store' });
+        if (!res.ok) res = await fetch('forecast_all.json', { cache: 'no-store' });
+        if (!res.ok) return;
+        const data = await res.json();
+        setAllForecasts({ bestModel: data.bestModel || null, models: Array.isArray(data.models) ? data.models : [] });
+        setSelectedModel(data.bestModel || (data.models?.[0]?.model ?? null));
+      } catch (_) {
+        // no-op
+      }
+    };
+    loadAll();
+  }, []);
+
+  // Данные для выбранной модели (если загружены все модели)
+  const selectedModelItems = useMemo(() => {
+    if (!showPrediction) return [];
+    if (allForecasts.models?.length && selectedModel) {
+      const m = allForecasts.models.find(x => x.model === selectedModel);
+      if (m && Array.isArray(m.items)) return m.items.map(it => ({
+        period: it.period,
+        volumeBillionTenge: it.volumeBillionTenge,
+        isPrediction: true
+      }));
+    }
+    return forecast.items || [];
+  }, [showPrediction, allForecasts, selectedModel, forecast]);
+
   const displayData = showPrediction
-    ? [...processedData, ...(forecast.items?.length ? forecast.items : [])]
+    ? [...processedData, ...selectedModelItems]
     : processedData;
 
   const stats = useMemo(() => {
@@ -196,9 +229,23 @@ export const BankTransfersDashboard = () => {
                 className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
               />
               <label htmlFor="prediction" className="ml-2 text-sm font-medium text-gray-700">
-                Показать прогноз на 6 месяцов {forecast.model ? `(ML: ${forecast.model})` : ''}
+                Показать прогноз на 6 месяцов {selectedModel ? `(ML: ${selectedModel})` : forecast.model ? `(ML: ${forecast.model})` : ''}
               </label>
             </div>
+            {allForecasts.models?.length > 0 && (
+              <div>
+                <label className="text-sm font-medium text-gray-700 mr-3">Модель:</label>
+                <select
+                  value={selectedModel || allForecasts.bestModel || ''}
+                  onChange={(e) => setSelectedModel(e.target.value)}
+                  className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  {allForecasts.models.map(m => (
+                    <option key={m.model} value={m.model}>{m.model}</option>
+                  ))}
+                </select>
+              </div>
+            )}
             {showPrediction && loadingForecast && (
               <span className="text-sm text-gray-500">Загрузка прогноза…</span>
             )}
@@ -240,7 +287,7 @@ export const BankTransfersDashboard = () => {
                 dot={{ fill: '#3b82f6', r: 5 }}
                 name={selectedMetric === 'volume' ? 'Объём (млрд ₸)' : selectedMetric === 'transactions' ? 'Транзакции (тыс.)' : 'Размер (₸)'}
               />
-              {showPrediction && forecast.items?.length > 0 && (
+              {showPrediction && selectedModelItems.length > 0 && (
                 <Line
                   type="monotone"
                   dataKey="volumeBillionTenge"
@@ -248,7 +295,7 @@ export const BankTransfersDashboard = () => {
                   strokeWidth={3}
                   strokeDasharray="5 5"
                   dot={{ fill: '#ef4444', r: 5 }}
-                  name="Прогноз (ML)"
+                  name={`Прогноз (${selectedModel || forecast.model || 'ML'})`}
                   connectNulls
                 />
               )}
@@ -328,7 +375,7 @@ export const BankTransfersDashboard = () => {
             <div className="p-4 bg-purple-50 rounded-lg">
               <h3 className="font-semibold text-gray-900 mb-2">📈 Прогноз</h3>
               <p className="text-sm text-gray-700">
-                ML-модель {forecast.model ? `(${forecast.model})` : ''} прогнозирует {showPrediction ? 'стабильный рост' : 'включите прогноз для просмотра'} 
+                ML-модель {selectedModel ? `(${selectedModel})` : forecast.model ? `(${forecast.model})` : ''} прогнозирует {showPrediction ? 'стабильный рост' : 'включите прогноз для просмотра'} 
                 межбанковских переводов на следующие месяцы
               </p>
             </div>

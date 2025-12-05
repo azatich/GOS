@@ -1,0 +1,381 @@
+{
+  "bestModel": "Linear Regression",
+  "models": [
+    {
+      "model": "Linear Regression",
+      "items": [
+        {
+          "period": "октябрь 2025",
+          "volumeBillionTenge": 134.1038563087081,
+          "isPrediction": true,
+          "year": 2025,
+          "month": 10
+        },
+        {
+          "period": "ноябрь 2025",
+          "volumeBillionTenge": 133.24872358543124,
+          "isPrediction": true,
+          "year": 2025,
+          "month": 11
+        },
+        {
+          "period": "декабрь 2025",
+          "volumeBillionTenge": 132.6101673820339,
+          "isPrediction": true,
+          "year": 2025,
+          "month": 12
+        },
+        {
+          "period": "январь 2026",
+          "volumeBillionTenge": 116.86168700721579,
+          "isPrediction": true,
+          "year": 2026,
+          "month": 1
+        },
+        {
+          "period": "февраль 2026",
+          "volumeBillionTenge": 117.80899541339593,
+          "isPrediction": true,
+          "year": 2026,
+          "month": 2
+        },
+        {
+          "period": "март 2026",
+          "volumeBillionTenge": 116.94576047689435,
+          "isPrediction": true,
+          "year": 2026,
+          "month": 3
+        }
+      ]
+    },
+    {
+      "model": "Ridge Regression",
+      "items": [
+        {
+          "period": "октябрь 2025",
+          "volumeBillionTenge": 133.88455824447527,
+          "isPrediction": true,
+          "year": 2025,
+          "month": 10
+        },
+        {
+          "period": "ноябрь 2025",
+          "volumeBillionTenge": 133.0618583119657,
+          "isPrediction": true,
+          "year": 2025,
+          "month": 11
+        },
+        {
+          "period": "декабрь 2025",
+          "volumeBillionTenge": 132.5399210411428,
+          "isPrediction": true,
+          "year": 2025,
+          "month": 12
+        },
+        {
+          "period": "январь 2026",
+          "volumeBillionTenge": 117.21807161915898,
+          "isPrediction": true,
+          "year": 2026,
+          "month": 1
+        },
+        {
+          "period": "февраль 2026",
+          "volumeBillionTenge": 118.11463972839516,
+          "isPrediction": true,
+          "year": 2026,
+          "month": 2
+        },
+        {
+          "period": "март 2026",
+          "volumeBillionTenge": 117.34939620678175,
+          "isPrediction": true,
+          "year": 2026,
+          "month": 3
+        }
+      ]
+    },
+    {
+      "model": "Lasso Regression",
+      "items": [
+        {
+          "period": "октябрь 2025",
+          "volumeBillionTenge": 144.66946515721634,
+          "isPrediction": true,
+          "year": 2025,
+          "month": 10
+        },
+        {
+          "period": "ноябрь 2025",
+          "volumeBillionTenge": 141.78039198113007,
+          "isPrediction": true,
+          "year": 2025,
+          "month": 11
+        },
+        {
+          "period": "декабрь 2025",
+          "volumeBillionTenge": 134.58926757831463,
+          "isPrediction": true,
+          "year": 2025,
+          "month": 12
+        },
+        {
+          "period": "январь 2026",
+          "volumeBillionTenge": 117.5429964650785,
+          "isPrediction": true,
+          "year": 2026,
+          "month": 1
+        },
+        {
+          "period": "февраль 2026",
+          "volumeBillionTenge": 114.6539232889922,
+          "isPrediction": true,
+          "year": 2026,
+          "month": 2
+        },
+        {
+          "period": "март 2026",
+          "volumeBillionTenge": 110.35187206226308,
+          "isPrediction": true,
+          "year": 2026,
+          "month": 3
+        }
+      ]
+    },
+    {
+      "model": "ElasticNet",
+      "items": [
+        {
+          "period": "октябрь 2025",
+          "volumeBillionTenge": 136.859178523703,
+          "isPrediction": true,
+          "year": 2025,
+          "month": 10
+        },
+        {
+          "period": "ноябрь 2025",
+          "volumeBillionTenge": 135.95905683682952,
+          "isPrediction": true,
+          "year": 2025,
+          "month": 11
+        },
+        {
+          "period": "декабрь 2025",
+          "volumeBillionTenge": 134.05313878051123,
+          "isPrediction": true,
+          "year": 2025,
+          "month": 12
+        },
+        {
+          "period": "январь 2026",
+          "volumeBillionTenge": 118.8293912446187,
+          "isPrediction": true,
+          "year": 2026,
+          "month": 1
+        },
+        {
+          "period": "февраль 2026",
+          "volumeBillionTenge": 118.31752668199395,
+          "isPrediction": true,
+          "year": 2026,
+          "month": 2
+        },
+        {
+          "period": "март 2026",
+          "volumeBillionTenge": 117.35152648403002,
+          "isPrediction": true,
+          "year": 2026,
+          "month": 3
+        }
+      ]
+    },
+    {
+      "model": "Random Forest",
+      "items": [
+        {
+          "period": "октябрь 2025",
+          "volumeBillionTenge": 127.84824230946464,
+          "isPrediction": true,
+          "year": 2025,
+          "month": 10
+        },
+        {
+          "period": "ноябрь 2025",
+          "volumeBillionTenge": 127.84824230946464,
+          "isPrediction": true,
+          "year": 2025,
+          "month": 11
+        },
+        {
+          "period": "декабрь 2025",
+          "volumeBillionTenge": 127.73566656997053,
+          "isPrediction": true,
+          "year": 2025,
+          "month": 12
+        },
+        {
+          "period": "январь 2026",
+          "volumeBillionTenge": 121.45535080594462,
+          "isPrediction": true,
+          "year": 2026,
+          "month": 1
+        },
+        {
+          "period": "февраль 2026",
+          "volumeBillionTenge": 120.71687870907056,
+          "isPrediction": true,
+          "year": 2026,
+          "month": 2
+        },
+        {
+          "period": "март 2026",
+          "volumeBillionTenge": 120.06880651941893,
+          "isPrediction": true,
+          "year": 2026,
+          "month": 3
+        }
+      ]
+    },
+    {
+      "model": "Gradient Boosting",
+      "items": [
+        {
+          "period": "октябрь 2025",
+          "volumeBillionTenge": 141.10422566992204,
+          "isPrediction": true,
+          "year": 2025,
+          "month": 10
+        },
+        {
+          "period": "ноябрь 2025",
+          "volumeBillionTenge": 141.10422566992204,
+          "isPrediction": true,
+          "year": 2025,
+          "month": 11
+        },
+        {
+          "period": "декабрь 2025",
+          "volumeBillionTenge": 140.39079883793622,
+          "isPrediction": true,
+          "year": 2025,
+          "month": 12
+        },
+        {
+          "period": "январь 2026",
+          "volumeBillionTenge": 119.70218178704656,
+          "isPrediction": true,
+          "year": 2026,
+          "month": 1
+        },
+        {
+          "period": "февраль 2026",
+          "volumeBillionTenge": 118.16724313973538,
+          "isPrediction": true,
+          "year": 2026,
+          "month": 2
+        },
+        {
+          "period": "март 2026",
+          "volumeBillionTenge": 117.17520012032426,
+          "isPrediction": true,
+          "year": 2026,
+          "month": 3
+        }
+      ]
+    },
+    {
+      "model": "Extra Trees",
+      "items": [
+        {
+          "period": "октябрь 2025",
+          "volumeBillionTenge": 134.53601064117976,
+          "isPrediction": true,
+          "year": 2025,
+          "month": 10
+        },
+        {
+          "period": "ноябрь 2025",
+          "volumeBillionTenge": 134.5033442275804,
+          "isPrediction": true,
+          "year": 2025,
+          "month": 11
+        },
+        {
+          "period": "декабрь 2025",
+          "volumeBillionTenge": 133.42670836278398,
+          "isPrediction": true,
+          "year": 2025,
+          "month": 12
+        },
+        {
+          "period": "январь 2026",
+          "volumeBillionTenge": 119.9966349895319,
+          "isPrediction": true,
+          "year": 2026,
+          "month": 1
+        },
+        {
+          "period": "февраль 2026",
+          "volumeBillionTenge": 117.57377667509108,
+          "isPrediction": true,
+          "year": 2026,
+          "month": 2
+        },
+        {
+          "period": "март 2026",
+          "volumeBillionTenge": 116.55025884647212,
+          "isPrediction": true,
+          "year": 2026,
+          "month": 3
+        }
+      ]
+    },
+    {
+      "model": "SVR",
+      "items": [
+        {
+          "period": "октябрь 2025",
+          "volumeBillionTenge": 128.73453026024447,
+          "isPrediction": true,
+          "year": 2025,
+          "month": 10
+        },
+        {
+          "period": "ноябрь 2025",
+          "volumeBillionTenge": 128.65470376787965,
+          "isPrediction": true,
+          "year": 2025,
+          "month": 11
+        },
+        {
+          "period": "декабрь 2025",
+          "volumeBillionTenge": 129.4510867308334,
+          "isPrediction": true,
+          "year": 2025,
+          "month": 12
+        },
+        {
+          "period": "январь 2026",
+          "volumeBillionTenge": 126.65644109667586,
+          "isPrediction": true,
+          "year": 2026,
+          "month": 1
+        },
+        {
+          "period": "февраль 2026",
+          "volumeBillionTenge": 126.81974517139065,
+          "isPrediction": true,
+          "year": 2026,
+          "month": 2
+        },
+        {
+          "period": "март 2026",
+          "volumeBillionTenge": 127.03669359712677,
+          "isPrediction": true,
+          "year": 2026,
+          "month": 3
+        }
+      ]
+    }
+  ]
+}
